@@ -2,7 +2,6 @@ package com.example.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -11,19 +10,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http
-            // 🔴 Disable CSRF for APIs
             .csrf(csrf -> csrf.disable())
-
-            // 🔓 Allow all API requests
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/**").permitAll()
-                .anyRequest().authenticated()
-            )
-
-            // Optional: disable login form
-            .httpBasic(Customizer.withDefaults())
-            .formLogin(form -> form.disable());
+                .anyRequest().permitAll()   // 🔥 NO AUTH ANYWHERE
+            );
 
         return http.build();
     }

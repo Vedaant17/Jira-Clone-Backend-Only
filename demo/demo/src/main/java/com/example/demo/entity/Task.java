@@ -15,6 +15,10 @@ public class Task {
 
     private boolean completed;
 
+    @Column(nullable = false)
+    private String tenantId;
+
+
     // getters & setters
     public Long getId() {
         return id;
@@ -47,4 +51,13 @@ public class Task {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
+
+    public String getTenantId() {
+    return tenantId;
+}
+
+public void setTenantId(String tenantId) {
+    this.tenantId = tenantId;
+}
+
 }
